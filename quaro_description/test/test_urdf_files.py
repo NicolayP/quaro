@@ -22,7 +22,7 @@ class TestquaroURDFFiles(unittest.TestCase):
     def test_xacro(self):
         # Retrieve the root folder for the tests
         test_dir = os.path.abspath(os.path.dirname(__file__))
-        robots_dir = os.path.join(test_dir, '..', 'robots')
+        robots_dir = os.path.join(test_dir, '..', 'urdf')
 
         for item in os.listdir(robots_dir):
             if 'quaro-foo' in item:
@@ -41,4 +41,4 @@ class TestquaroURDFFiles(unittest.TestCase):
 
 if __name__ == '__main__':
     import rosunit
-    rosunit.unitrun(PKG, NAME, TestRexROVURDFFiles)
+    rosunit.unitrun(PKG, NAME, TestquaroURDFFiles)

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot name="quaro-body" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="pi" value="3.1415"/>
+  <xacro:include filename="$(find quaro_description)/urdf/colors.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/leg.xacro"/>
+  <!-- first link -->
+  <link name="front">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/front.stl"/>
+      </geometry>
+      <material name="pink"/>
+      <origin rpy="0 0 0" xyz="0 0 20"/>
+    </visual>
+  </link>
+
+  <link name="back">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/back.stl"/>
+      </geometry>
+      <material name="gray"/>
+      <origin rpy="0 0 0" xyz="-15 0 20"/>
+    </visual>
+  </link>
+
+  <joint name="chest" type="revolute">
+    <parent link="front"/>
+    <child link="back"/>
+    <origin rpy="0 0 0" xyz="-15 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
+  </joint>
+
+  <xacro:leg n="0" x="150" y="90" angle="${1*pi/4}" parent="front"/>
+  <xacro:leg n="1" x="150" y="-90" angle="-${1*pi/4}" parent="front"/>
+  <xacro:leg n="2" x="-140" y="90" angle="${3*pi/4}" parent="back"/>
+  <xacro:leg n="3" x="-140" y="-90" angle="-${3*pi/4}" parent="back"/>
+
+</robot>

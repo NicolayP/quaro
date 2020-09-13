@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot name="quaro-leg" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- parameter n is the leg number-->
+  <xacro:macro name="leg" params="n x y angle parent">
+  <!-- first link -->
+  <link name="thigh${n}">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/thigh.stl"/>
+      </geometry>
+      <material name="red"/>
+      <origin rpy="${pi/2} 0  ${pi/2}" xyz="-15 -20 -20"/>
+    </visual>
+  </link>
+
+  <link name="shin${n}">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/shin.stl"/>
+      </geometry>
+      <material name="blue"/>
+      <origin rpy="0 0 0" xyz="20 -20 -20"/>
+    </visual>
+  </link>
+
+  <joint name="knee${n}" type="revolute">
+    <parent link="thigh${n}"/>
+    <child link="shin${n}"/>
+    <origin rpy="${pi/2} 0 0" xyz="30 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
+  </joint>
+
+  <link name="foot${n}">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/foot.stl"/>
+      </geometry>
+      <material name="green"/>
+      <origin ryp="0 0 0" xyz="20 -105 -20"/>
+    </visual>
+  </link>
+
+  <joint name="ankle${n}" type="revolute">
+    <parent link="shin${n}"/>
+    <child link="foot${n}"/>
+    <origin rpy="0 0 0" xyz="70 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
+  </joint>
+
+  <joint name="hip${n}" type="revolute">
+    <parent link="${parent}"/>
+    <child link="thigh${n}"/>
+    <origin rpy="0 0 ${angle}" xyz="${x} ${y} -10"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-${pi/2}" upper="${pi/2}" velocity="0.5"/>
+  </joint>
+
+</xacro:macro>
+</robot>
