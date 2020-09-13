@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>quaro_description</name>
+  <version>0.0.0</version>
+  <description>The quaro_description package of the quaro robot.</description>
+  <maintainer email="nicolaypierre.95@gmail.com">pierre</maintainer>
+  <license>MIT</license>
+  <!-- <url type="website">http://wiki.ros.org/quaro_description</url> -->
+
+
+  <author email="nicolaypierre.95@gmail.com">Pierre</author>
+  <!-- Use doc_depend for packages you need only for building documentation: -->
+  <!--   <doc_depend>doxygen</doc_depend> -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <test_depend>rostest</test_depend>
+  <test_depend>xacro</test_depend>
+  <test_depend>rosunit</test_depend>
+
+</package>
