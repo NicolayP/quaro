@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="settings">
+    <selfCollide>True</selfCollide>
+    <turnGravityOff>False</turnGravityOff>
+  </xacro:macro>
+
+  <xacro:macro name="black" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Black</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="red" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Red</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="grey" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Grey</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="blue" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Blue</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="green" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Green</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="yellow" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Yellow</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="orange" params="name">
+    <gazebo reference="${name}">
+      <material>Gazebo/Orange</material>
+      <xacro:settings/>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="leg_gazebo" params="n">
+    <xacro:red name="thigh${n}"/>
+    <xacro:blue name="shin${n}"/>
+    <xacro:green name="foot${n}"/>
+
+    <transmission name="knee${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="knee${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor-knee${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="ankle${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="ankle${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor-ankle${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="hip${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="hip${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor-hip${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+
+  <!-- Base -->
+  <xacro:black name="front"/>
+  <xacro:grey name="back"/>
+  <xacro:leg_gazebo n="0"/>
+  <xacro:leg_gazebo n="1"/>
+  <xacro:leg_gazebo n="2"/>
+  <xacro:leg_gazebo n="3"/>
+
+
+</robot>

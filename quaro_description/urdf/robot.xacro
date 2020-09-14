@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="quaro-body" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="pi" value="3.1415"/>
+  <xacro:include filename="$(find quaro_description)/urdf/colors.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/leg.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/body.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/robot.gazebo"/>
+
+  <xacro:property name="scale" value="${0.01}"/>
+  <xacro:property name="scale_mm" value="${1e-3*scale}"/>
+  <xacro:property name="scale_mm2" value="${scale_mm*scale_mm}"/>
+  <xacro:property name="gtoKg" value="1e-3"/>
+  <xacro:property name="angle_lim_low" value="${-8/18*pi}"/>
+  <xacro:property name="angle_lim_high" value="${8/18*pi}"/>
+
+
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/quaro</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+  <!-- first link -->
+
+  <xacro:body sensors="none"/>
+  <xacro:leg n="0" x="131.56" y="75.45" angle="${1*pi/4}" parent="front"/>
+  <xacro:leg n="1" x="131.56" y="-75.45" angle="-${1*pi/4}" parent="front"/>
+  <xacro:leg n="2" x="-122.56" y="75" angle="${3*pi/4}" parent="back"/>
+  <xacro:leg n="3" x="-122.56" y="-75" angle="-${3*pi/4}" parent="back"/>
+</robot>

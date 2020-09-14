@@ -1,40 +1,124 @@
 <?xml version="1.0"?>
 <robot name="quaro-body" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:property name="pi" value="3.1415"/>
-  <xacro:include filename="$(find quaro_description)/urdf/colors.xacro"/>
-  <xacro:include filename="$(find quaro_description)/urdf/leg.xacro"/>
-  <!-- first link -->
+  <!-- Sensor param will be used later when stereo camera and other sensors will be installed. -->
+  <xacro:macro name="body" params="sensors">
+
   <link name="front">
     <visual>
       <geometry>
-        <mesh filename="package://quaro_description/meshes/front.stl"/>
+        <mesh filename="package://quaro_description/meshes/front.stl" scale="${scale} ${scale} ${scale}"/>
       </geometry>
       <material name="pink"/>
-      <origin rpy="0 0 0" xyz="0 0 20"/>
+      <origin rpy="0 0 0" xyz="0 0 ${21*scale}"/>
     </visual>
+    <inertial>
+      <mass value="${60*gtoKg}" />
+      <inertia  ixx="${1*scale_mm2*gtoKg}"
+                ixy="${0*scale_mm2*gtoKg}"
+                ixz="${0*scale_mm2*gtoKg}"
+                iyy="${1*scale_mm2*gtoKg}"
+                iyz="${0*scale_mm2*gtoKg}"
+                izz="${1*scale_mm2*gtoKg}" />
+    </inertial>
+    <collision>
+       <geometry>
+         <mesh filename="package://quaro_description/meshes/front.stl" scale="${scale} ${scale} ${scale}"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="0 0 ${20*scale}"/>
+     </collision>
   </link>
 
   <link name="back">
     <visual>
       <geometry>
-        <mesh filename="package://quaro_description/meshes/back.stl"/>
+        <mesh filename="package://quaro_description/meshes/back.stl" scale="${scale} ${scale} ${scale}"/>
       </geometry>
       <material name="gray"/>
-      <origin rpy="0 0 0" xyz="-15 0 20"/>
+      <origin rpy="0 0 0" xyz="-${15*scale} 0 ${20*scale}"/>
+    </visual>
+    <inertial>
+      <mass value="${60*gtoKg}" />
+      <inertia  ixx="${1*scale_mm2*gtoKg}"
+                ixy="${0*scale_mm2*gtoKg}"
+                ixz="${0*scale_mm2*gtoKg}"
+                iyy="${1*scale_mm2*gtoKg}"
+                iyz="${0*scale_mm2*gtoKg}"
+                izz="${1*scale_mm2*gtoKg}" />
+    </inertial>
+    <collision>
+       <geometry>
+         <mesh filename="package://quaro_description/meshes/back.stl"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="-${15*scale} 0 ${20*scale}"/>
+     </collision>
+  </link>
+
+  <link name="chest-servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+      <material name="red"/>
+      <origin rpy="${pi/2} ${pi} 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
+    </visual>
+    <inertial>
+      <mass value="${600*gtoKg}" />
+      <inertia  ixx="${1*scale_mm2*gtoKg}"
+              ixy="${0*scale_mm2*gtoKg}"
+              ixz="${0*scale_mm2*gtoKg}"
+              iyy="${1*scale_mm2*gtoKg}"
+              iyz="${0*scale_mm2*gtoKg}"
+              izz="${1*scale_mm2*gtoKg}" />
+    </inertial>
+    <collision>
+       <geometry>
+         <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
+       </geometry>
+       <origin rpy="${pi/2} 0  ${pi/2}" xyz="-${15*scale} -${20*scale} -${20*scale}"/>
+     </collision>
+  </link>
+
+  <link name="spine">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/link-chest.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+      <material name="yellow"/>
+      <origin rpy="${pi/2} ${pi/2} 0" xyz="-${11*scale} ${22*scale} ${16*scale}"/>
     </visual>
   </link>
 
+  <joint name="servo-link" type="fixed">
+    <parent link="back"/>
+    <child link="chest-servo"/>
+    <origin rpy="0 0 0" xyz="-${5*scale} ${0*scale} ${0*scale}"/>
+  </joint>
+
   <joint name="chest" type="revolute">
-    <parent link="front"/>
-    <child link="back"/>
-    <origin rpy="0 0 0" xyz="-15 0 0"/>
+    <parent link="chest-servo"/>
+    <child link="spine"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
     <axis xyz="0 1 0"/>
     <limit effort="1000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
   </joint>
 
-  <xacro:leg n="0" x="150" y="90" angle="${1*pi/4}" parent="front"/>
-  <xacro:leg n="1" x="150" y="-90" angle="-${1*pi/4}" parent="front"/>
-  <xacro:leg n="2" x="-140" y="90" angle="${3*pi/4}" parent="back"/>
-  <xacro:leg n="3" x="-140" y="-90" angle="-${3*pi/4}" parent="back"/>
+  <joint name="last" type="fixed">
+    <parent link="spine"/>
+    <child link="front"/>
+    <origin ryp="0 0 0" xyz="${15 *scale} ${0*scale} ${0*scale}"/>
+  </joint>
 
+
+  <transmission name="chest">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="chest">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor-chest">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  </xacro:macro>
 </robot>
