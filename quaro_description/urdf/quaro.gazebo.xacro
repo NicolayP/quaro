@@ -56,9 +56,23 @@
   </xacro:macro>
 
   <xacro:macro name="leg_gazebo" params="n">
+    <xacro:red name="hip${n}-servo"/>
     <xacro:red name="thigh${n}"/>
+    <xacro:red name="knee{n}-servo"/>
     <xacro:blue name="shin${n}"/>
+    <xacro:green name="ankle${n}-servo"/>
     <xacro:green name="foot${n}"/>
+
+    <transmission name="hip${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="hip${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor-hip${n}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
 
     <transmission name="knee${n}">
       <type>transmission_interface/SimpleTransmission</type>
@@ -70,6 +84,7 @@
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
+
     <transmission name="ankle${n}">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="ankle${n}">
@@ -80,16 +95,8 @@
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
-    <transmission name="hip${n}">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="hip${n}">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="motor-hip${n}">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
+
+
   </xacro:macro>
 
 

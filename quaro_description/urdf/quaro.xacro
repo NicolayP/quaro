@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <robot name="quaro-body" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:property name="pi" value="3.1415"/>
-  <xacro:include filename="$(find quaro_description)/urdf/colors.xacro"/>
-  <xacro:include filename="$(find quaro_description)/urdf/leg.xacro"/>
-  <xacro:include filename="$(find quaro_description)/urdf/body.xacro"/>
-  <xacro:include filename="$(find quaro_description)/urdf/robot.gazebo"/>
+  <xacro:property name="version" value=".0.0"/>
+  <xacro:include filename="$(find quaro_description)/urdf/common/colors.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/leg/leg${version}.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/body/body${version}.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/quaro.gazebo.xacro"/>
 
   <xacro:property name="scale" value="${0.01}"/>
   <xacro:property name="scale_mm" value="${1e-3*scale}"/>
