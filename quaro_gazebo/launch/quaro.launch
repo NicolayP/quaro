@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- argument for launch file-->
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find quaro_gazebo)/world/empty.world"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <include file="$(find quaro_description)/launch/display.launch">
+    <arg name="model" value="$(find quaro_description)/urdf/quaro.xacro"/>
+    <arg name="robot_name" default="quaro"/>
+  </include>
+
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find quaro_description)/urdf/quaro.xacro'"/>
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -model quaro -param robot_description -x 1 -x 2 -z 1.5"/>
+</launch>
