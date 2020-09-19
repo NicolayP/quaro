@@ -14,6 +14,19 @@
   <xacro:property name="angle_lim_low" value="${-8/18*pi}"/>
   <xacro:property name="angle_lim_high" value="${8/18*pi}"/>
 
+  <!-- first link -->
+  <link name="dummy-link"/>
+
+  <joint name="dummy-base" type="fixed">
+    <parent link="dummy-link"/>
+    <child link="back"/>
+    <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${200*scale}"/>
+  </joint>
+  <xacro:body sensors="none"/>
+  <xacro:leg n="0" x="132.63" y="74.77" z="-21" rpy="0 0 ${1*pi/4}" parent="front"/>
+  <xacro:leg n="1" x="132.63" y="-74.77" z="-21" rpy="0 0 -${1*pi/4}" parent="front"/>
+  <xacro:leg n="2" x="-107.63" y="74.77" z="-21" rpy="0 0 ${3*pi/4}" parent="back"/>
+  <xacro:leg n="3" x="-107.63" y="-74.77" z="-21" rpy="0 0 -${3*pi/4}" parent="back"/>
 
   <!-- ros_control plugin -->
   <gazebo>
@@ -23,11 +36,5 @@
       <legacyModeNS>true</legacyModeNS>
     </plugin>
   </gazebo>
-  <!-- first link -->
 
-  <xacro:body sensors="none"/>
-  <xacro:leg n="0" x="131.56" y="75.45" angle="${1*pi/4}" parent="front"/>
-  <xacro:leg n="1" x="131.56" y="-75.45" angle="-${1*pi/4}" parent="front"/>
-  <xacro:leg n="2" x="-122.56" y="75" angle="${3*pi/4}" parent="back"/>
-  <xacro:leg n="3" x="-122.56" y="-75" angle="-${3*pi/4}" parent="back"/>
 </robot>

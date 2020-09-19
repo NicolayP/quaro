@@ -58,7 +58,7 @@
   <xacro:macro name="leg_gazebo" params="n">
     <xacro:red name="hip${n}-servo"/>
     <xacro:red name="thigh${n}"/>
-    <xacro:red name="knee{n}-servo"/>
+    <xacro:blue name="knee${n}-servo"/>
     <xacro:blue name="shin${n}"/>
     <xacro:green name="ankle${n}-servo"/>
     <xacro:green name="foot${n}"/>
@@ -100,13 +100,27 @@
   </xacro:macro>
 
 
+  <transmission name="chest">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="chest">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor-chest">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
   <!-- Base -->
-  <xacro:black name="front"/>
   <xacro:grey name="back"/>
+  <xacro:yellow name="chest-servo"/>
+
+  <xacro:yellow name="spine"/>
+  <xacro:black name="front"/>
+
   <xacro:leg_gazebo n="0"/>
   <xacro:leg_gazebo n="1"/>
   <xacro:leg_gazebo n="2"/>
   <xacro:leg_gazebo n="3"/>
-
 
 </robot>

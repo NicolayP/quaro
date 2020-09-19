@@ -64,26 +64,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        ankle0-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ankle1-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ankle2-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ankle3-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         back:
           Alpha: 1
           Show Axes: false
@@ -94,112 +74,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        foot0:
+        dummy-link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        foot1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        foot2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        foot3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         front:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        hip0-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        hip1-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        hip2-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        hip3-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        knee0-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        knee1-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        knee2-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        knee3-servo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        shin0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        shin1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        shin2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        shin3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         spine:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        thigh0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        thigh1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        thigh2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        thigh3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -215,61 +99,15 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        ankle0-servo:
-          Value: true
-        ankle1-servo:
-          Value: true
-        ankle2-servo:
-          Value: true
-        ankle3-servo:
-          Value: true
         back:
           Value: true
         chest-servo:
           Value: true
-        foot0:
-          Value: true
-        foot1:
-          Value: true
-        foot2:
-          Value: true
-        foot3:
+        dummy-link:
           Value: true
         front:
           Value: true
-        hip0-servo:
-          Value: true
-        hip1-servo:
-          Value: true
-        hip2-servo:
-          Value: true
-        hip3-servo:
-          Value: true
-        knee0-servo:
-          Value: true
-        knee1-servo:
-          Value: true
-        knee2-servo:
-          Value: true
-        knee3-servo:
-          Value: true
-        shin0:
-          Value: true
-        shin1:
-          Value: true
-        shin2:
-          Value: true
-        shin3:
-          Value: true
         spine:
-          Value: true
-        thigh0:
-          Value: true
-        thigh1:
-          Value: true
-        thigh2:
-          Value: true
-        thigh3:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -277,46 +115,19 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        back:
-          chest-servo:
-            {}
-          hip2-servo:
-            thigh2:
-              knee2-servo:
-                shin2:
-                  ankle2-servo:
-                    foot2:
-                      {}
-          hip3-servo:
-            thigh3:
-              knee3-servo:
-                shin3:
-                  ankle3-servo:
-                    foot3:
-                      {}
-        spine:
-          front:
-            hip0-servo:
-              thigh0:
-                knee0-servo:
-                  shin0:
-                    ankle0-servo:
-                      foot0:
-                        {}
-            hip1-servo:
-              thigh1:
-                knee1-servo:
-                  shin1:
-                    ankle1-servo:
-                      foot1:
-                        {}
+        dummy-link:
+          back:
+            chest-servo:
+              spine:
+                front:
+                  {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: front
+    Fixed Frame: dummy-link
     Frame Rate: 30
   Name: root
   Tools:
@@ -340,25 +151,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.091826438903809
+      Distance: 7.202235698699951
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.21951712667942047
-        Y: -0.48677748441696167
-        Z: 0.208612322807312
+        X: 0.9539067149162292
+        Y: -0.10772359371185303
+        Z: 1.8111991882324219
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.31479689478874207
+      Pitch: 0.19520264863967896
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.5480549335479736
+      Yaw: 1.6680618524551392
     Saved: ~
 Window Geometry:
   Displays:
@@ -377,4 +188,4 @@ Window Geometry:
     collapsed: false
   Width: 1216
   X: 550
-  Y: 136
+  Y: 27

@@ -3,41 +3,17 @@
   <!-- Sensor param will be used later when stereo camera and other sensors will be installed. -->
   <xacro:macro name="body" params="sensors">
 
-  <link name="front">
-    <visual>
-      <geometry>
-        <mesh filename="package://quaro_description/meshes/front.stl" scale="${scale} ${scale} ${scale}"/>
-      </geometry>
-      <material name="pink"/>
-      <origin rpy="0 0 0" xyz="0 0 ${21*scale}"/>
-    </visual>
-    <inertial>
-      <mass value="${60*gtoKg}" />
-      <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
-    </inertial>
-    <collision>
-       <geometry>
-         <mesh filename="package://quaro_description/meshes/front.stl" scale="${scale} ${scale} ${scale}"/>
-       </geometry>
-       <origin rpy="0 0 0" xyz="0 0 ${20*scale}"/>
-     </collision>
-  </link>
-
   <link name="back">
     <visual>
       <geometry>
         <mesh filename="package://quaro_description/meshes/back.stl" scale="${scale} ${scale} ${scale}"/>
       </geometry>
       <material name="gray"/>
-      <origin rpy="0 0 0" xyz="-${15*scale} 0 ${20*scale}"/>
+      <origin rpy="0 0 0" xyz="${0*scale} 0 ${0*scale}"/>
     </visual>
     <inertial>
       <mass value="${60*gtoKg}" />
+      <origin rpy="0 0 0" xyz="-${54.98*scale} ${0*scale} -${21.33*scale}"/>
       <inertia  ixx="${1*scale_mm2*gtoKg}"
                 ixy="${0*scale_mm2*gtoKg}"
                 ixz="${0*scale_mm2*gtoKg}"
@@ -47,10 +23,10 @@
     </inertial>
     <collision>
        <geometry>
-         <mesh filename="package://quaro_description/meshes/back.stl"/>
+         <mesh filename="package://quaro_description/meshes/back.stl" scale="${scale} ${scale} ${scale}"/>
        </geometry>
-       <origin rpy="0 0 0" xyz="-${15*scale} 0 ${20*scale}"/>
-     </collision>
+       <origin rpy="0 0 0" xyz="${0*scale} 0 ${0*scale}"/>
+    </collision>
   </link>
 
   <link name="chest-servo">
@@ -59,10 +35,11 @@
         <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
       </geometry>
       <material name="red"/>
-      <origin rpy="${pi/2} ${pi} 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
+      <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
     </visual>
     <inertial>
-      <mass value="${600*gtoKg}" />
+      <mass value="${60*gtoKg}" />
+      <origin rpy="0 0 0" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
       <inertia  ixx="${1*scale_mm2*gtoKg}"
               ixy="${0*scale_mm2*gtoKg}"
               ixz="${0*scale_mm2*gtoKg}"
@@ -74,7 +51,7 @@
        <geometry>
          <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
        </geometry>
-       <origin rpy="${pi/2} 0  ${pi/2}" xyz="-${15*scale} -${20*scale} -${20*scale}"/>
+       <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
      </collision>
   </link>
 
@@ -84,20 +61,62 @@
         <mesh filename="package://quaro_description/meshes/link-chest.stl" scale="${scale} ${scale} ${scale}"/>
       </geometry>
       <material name="yellow"/>
-      <origin rpy="${pi/2} ${pi/2} 0" xyz="-${11*scale} ${22*scale} ${16*scale}"/>
+      <origin rpy="0 0 0" xyz="${16.58*scale} -${0.56*scale} ${0*scale}"/>
     </visual>
+    <inertial>
+      <mass value="${60*gtoKg}" />
+      <origin rpy="0 0 0" xyz="${0*scale} -${0.56*scale} ${0*scale}"/>
+      <inertia  ixx="${1*scale_mm2*gtoKg}"
+                ixy="${0*scale_mm2*gtoKg}"
+                ixz="${0*scale_mm2*gtoKg}"
+                iyy="${1*scale_mm2*gtoKg}"
+                iyz="${0*scale_mm2*gtoKg}"
+                izz="${1*scale_mm2*gtoKg}" />
+    </inertial>
+    <collision>
+       <geometry>
+         <mesh filename="package://quaro_description/meshes/link-chest.stl" scale="${scale} ${scale} ${scale}"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="${16.58*scale} -${0.56*scale} ${0*scale}"/>
+     </collision>
+  </link>
+
+  <link name="front">
+    <visual>
+      <geometry>
+        <mesh filename="package://quaro_description/meshes/front.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+      <material name="pink"/>
+      <origin rpy="${0} ${0} ${0}" xyz="${0*scale} ${0*scale} ${0*scale}"/>
+    </visual>
+    <inertial>
+      <mass value="${60*gtoKg}" />
+      <origin rpy="0 0 0" xyz="${71.80*scale} ${0*scale} -${24.62*scale}"/>
+      <inertia  ixx="${1*scale_mm2*gtoKg}"
+                ixy="${0*scale_mm2*gtoKg}"
+                ixz="${0*scale_mm2*gtoKg}"
+                iyy="${1*scale_mm2*gtoKg}"
+                iyz="${0*scale_mm2*gtoKg}"
+                izz="${1*scale_mm2*gtoKg}" />
+    </inertial>
+    <collision>
+       <geometry>
+         <mesh filename="package://quaro_description/meshes/front.stl" scale="${scale} ${scale} ${scale}"/>
+       </geometry>
+       <origin rpy="0 0 0" xyz="0 0 ${0*scale}"/>
+     </collision>
   </link>
 
   <joint name="servo-link" type="fixed">
     <parent link="back"/>
     <child link="chest-servo"/>
-    <origin rpy="0 0 0" xyz="-${5*scale} ${0*scale} ${0*scale}"/>
+    <origin rpy="${pi/2} ${pi} 0" xyz="${0*scale} -${0.17*scale} -${21*scale}"/>
   </joint>
 
   <joint name="chest" type="revolute">
     <parent link="chest-servo"/>
     <child link="spine"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <origin rpy="${-pi/2} ${0} ${-pi}" xyz="-${0*scale} -${0*scale} ${0*scale}"/>
     <axis xyz="0 1 0"/>
     <limit effort="1000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
   </joint>
@@ -105,20 +124,8 @@
   <joint name="last" type="fixed">
     <parent link="spine"/>
     <child link="front"/>
-    <origin ryp="0 0 0" xyz="${15 *scale} ${0*scale} ${0*scale}"/>
+    <origin ryp="${0} ${0} ${0}" xyz="${16.58*scale} ${0*scale} ${21*scale}"/>
   </joint>
-
-
-  <transmission name="chest">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="chest">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor-chest">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
 
   </xacro:macro>
 </robot>
