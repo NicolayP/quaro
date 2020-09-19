@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="ax12a-servo" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="ax12a" params="name rpy color">
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
+        </geometry>
+        <material name="${color}"/>
+        <origin rpy="${rpy}" xyz="${0*scale} ${0*scale} ${0*scale}"/>
+      </visual>
+      <inertial>
+        <mass value="${43.01*gtoKg}" />
+        <origin rpy="${rpy}" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
+
+        <inertia  ixx="${6917994*scale_mm2*gtoKg}"
+                ixy="${-16.968233*scale_mm2*gtoKg}"
+                ixz="${187361.046875*scale_mm2*gtoKg}"
+                iyy="${12482635*scale_mm2*gtoKg}"
+                iyz="${2.895725*scale_mm2*gtoKg}"
+                izz="${10437801*scale_mm2*gtoKg}" />
+      </inertial>
+      <collision>
+         <geometry>
+           <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
+         </geometry>
+         <origin rpy="${rpy}" xyz="${0*scale} ${0*scale} ${0*scale}"/>
+       </collision>
+    </link>
+  </xacro:macro>
+</robot>
