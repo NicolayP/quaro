@@ -6,9 +6,10 @@
   <xacro:include filename="$(find quaro_description)/urdf/leg/leg${version}.xacro"/>
   <xacro:include filename="$(find quaro_description)/urdf/body/body${version}.xacro"/>
   <xacro:include filename="$(find quaro_description)/urdf/quaro.gazebo.xacro"/>
+  <xacro:include filename="$(find quaro_description)/urdf/common/ax12a.xacro"/>
 
-  <xacro:property name="scale" value="${0.01}"/>
-  <xacro:property name="scale_mm" value="${1e-3*scale}"/>
+  <xacro:property name="scale" value="${1e-3}"/>
+  <xacro:property name="scale_mm" value="${1*scale}"/>
   <xacro:property name="scale_mm2" value="${scale_mm*scale_mm}"/>
   <xacro:property name="gtoKg" value="1e-3"/>
   <xacro:property name="angle_lim_low" value="${-8/18*pi}"/>
@@ -20,7 +21,7 @@
   <joint name="dummy-base" type="fixed">
     <parent link="dummy-link"/>
     <child link="back"/>
-    <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${200*scale}"/>
+    <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${150*scale}"/>
   </joint>
   <xacro:body sensors="none"/>
   <xacro:leg n="0" x="132.63" y="74.77" z="-21" rpy="0 0 ${1*pi/4}" parent="front"/>

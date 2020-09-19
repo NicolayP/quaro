@@ -2,32 +2,12 @@
 <robot name="quaro-leg" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- parameter n is the leg number-->
   <xacro:macro name="leg" params="n x y z rpy parent">
+    <!-- 0 value in the inertia tensor can cause the robot to crash and
+         sets the link to their origin in the world frame.
+    -->
+    <xacro:property name="zero" value="1"/>
     <!-- first link -->
-    <link name="hip${n}-servo">
-      <visual>
-        <geometry>
-          <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-        </geometry>
-        <material name="red"/>
-        <origin rpy="0 ${pi} 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
-      </visual>
-      <inertial>
-        <mass value="${60*gtoKg}" />
-        <origin rpy="0 0 0" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
-        <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
-      </inertial>
-      <collision>
-         <geometry>
-           <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-         </geometry>
-         <origin rpy="0 ${pi} 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
-       </collision>
-    </link>
+    <xacro:ax12a name="hip${n}-servo" rpy="0 ${pi} 0" color="red"/>
 
     <joint name="hip-link${n}" type="fixed">
       <parent link="${parent}"/>
@@ -44,14 +24,14 @@
         <origin rpy="${0} 0 -${pi/2}" xyz="${24.10*scale} -${0*scale} -${0*scale}"/>
       </visual>
       <inertial>
-        <mass value="${60*gtoKg}" />
+        <mass value="${19.19*gtoKg}" />
         <origin rpy="${pi} 0 ${pi/2}" xyz="${24.10*scale} -${0*scale} -${0*scale}"/>
-        <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
+        <inertia  ixx="${1783.52*scale_mm2*gtoKg}"
+                ixy="${zero*scale_mm2*gtoKg}"
+                ixz="${zero*scale_mm2*gtoKg}"
+                iyy="${6524.07*scale_mm2*gtoKg}"
+                iyz="${-170.99*scale_mm2*gtoKg}"
+                izz="${6788.11*scale_mm2*gtoKg}" />
       </inertial>
       <collision>
          <geometry>
@@ -66,34 +46,10 @@
       <child link="thigh${n}"/>
       <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
       <axis xyz="0 0 1"/>
-      <limit effort="1000.0" lower="${-pi/3}" upper="${pi/3}" velocity="0.5"/>
+      <limit effort="100000.0" lower="${-pi/3}" upper="${pi/3}" velocity="0.5"/>
     </joint>
 
-    <link name="knee${n}-servo">
-      <visual>
-        <geometry>
-          <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-        </geometry>
-        <material name="blue"/>
-        <origin rpy="${0} 0 ${0}" xyz="-${0*scale} -${0*scale} ${0*scale}"/>
-      </visual>
-      <inertial>
-        <mass value="${60*gtoKg}" />
-        <origin rpy="0 0 0" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
-        <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
-      </inertial>
-      <collision>
-         <geometry>
-           <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-         </geometry>
-         <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
-       </collision>
-    </link>
+    <xacro:ax12a name="knee${n}-servo" rpy="0 0 0" color="blue"/>
 
     <joint name="knee${n}-link" type="fixed">
       <parent link="thigh${n}"/>
@@ -110,14 +66,14 @@
         <origin rpy="${0} ${pi/2} ${pi/2}" xyz="-${23.63*scale} ${0*scale} ${0.31*scale}"/>
       </visual>
       <inertial>
-        <mass value="${60*gtoKg}" />
+        <mass value="${20.73*gtoKg}" />
         <origin rpy="${0} ${pi/2} ${pi/2}" xyz="-${23.63*scale} ${0*scale} ${0.31*scale}"/>
-        <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
+        <inertia  ixx="${8962.80*scale_mm2*gtoKg}"
+                ixy="${-167.48*scale_mm2*gtoKg}"
+                ixz="${zero*scale_mm2*gtoKg}"
+                iyy="${6916.45*scale_mm2*gtoKg}"
+                iyz="${zero*scale_mm2*gtoKg}"
+                izz="${10135.24*scale_mm2*gtoKg}" />
       </inertial>
       <collision>
          <geometry>
@@ -132,34 +88,10 @@
       <child link="shin${n}"/>
       <origin rpy="0 0 0" xyz="${0*scale} 0 0"/>
       <axis xyz="0 0 1"/>
-      <limit effort="1000.0" lower="${-pi/3}" upper="${pi/3}" velocity="0.5"/>
+      <limit effort="100000.0" lower="${-pi/3}" upper="${pi/3}" velocity="0.5"/>
     </joint>
 
-    <link name="ankle${n}-servo">
-      <visual>
-        <geometry>
-          <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-        </geometry>
-        <material name="green"/>
-        <origin rpy="${0} 0 ${0}" xyz="-${0*scale} -${0*scale} ${0*scale}"/>
-      </visual>
-      <inertial>
-        <mass value="${60*gtoKg}" />
-        <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
-      </inertial>
-      <origin rpy="0 0 0" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
-      <collision>
-         <geometry>
-           <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-         </geometry>
-         <origin rpy="0 0 0" xyz="${0*scale} -${0*scale} -${0*scale}"/>
-       </collision>
-    </link>
+    <xacro:ax12a name="ankle${n}-servo" rpy="0 0 0" color="green"/>
 
     <joint name="ankle${n}-link" type="fixed">
       <parent link="shin${n}"/>
@@ -176,14 +108,15 @@
         <origin rpy="${0} 0 ${0}" xyz="${35.02*scale} -${28.64*scale} ${2.64*scale}"/>
       </visual>
       <inertial>
-        <mass value="${60*gtoKg}" />
+        <mass value="${27.98*gtoKg}" />
         <origin ryp="0 0 0" xyz="${35.02*scale} -${28.64*scale} ${2.64*scale}"/>
-        <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
+
+        <inertia  ixx="${44410.23*scale_mm2*gtoKg}"
+                ixy="${-22384.35*scale_mm2*gtoKg}"
+                ixz="${-249.17*scale_mm2*gtoKg}"
+                iyy="${20692.66*scale_mm2*gtoKg}"
+                iyz="${202.94*scale_mm2*gtoKg}"
+                izz="${55471.08*scale_mm2*gtoKg}" />
       </inertial>
       <collision>
          <geometry>
@@ -198,7 +131,7 @@
       <child link="foot${n}"/>
       <origin rpy="0 ${pi} 0" xyz="${0*scale} 0 0"/>
       <axis xyz="0 0 1"/>
-      <limit effort="1000.0" lower="${-pi/3}" upper="${pi/3}" velocity="0.5"/>
+      <limit effort="100000.0" lower="${-pi/3}" upper="${pi/3}" velocity="0.5"/>
     </joint>
 
   </xacro:macro>

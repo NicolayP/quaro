@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
+
 <robot name="quaro-body" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Sensor param will be used later when stereo camera and other sensors will be installed. -->
+
+  <!-- 0 value in the inertia tensor can cause the robot to crash and
+       sets the link to their origin in the world frame.
+  -->
+  <xacro:property name="zero" value="1"/>
+
   <xacro:macro name="body" params="sensors">
 
   <link name="back">
@@ -12,14 +19,15 @@
       <origin rpy="0 0 0" xyz="${0*scale} 0 ${0*scale}"/>
     </visual>
     <inertial>
-      <mass value="${60*gtoKg}" />
+      <mass value="${125.63*gtoKg}" />
       <origin rpy="0 0 0" xyz="-${54.98*scale} ${0*scale} -${21.33*scale}"/>
-      <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
+
+      <inertia  ixx="${296016.48*scale_mm2*gtoKg}"
+                ixy="${zero*scale_mm2*gtoKg}"
+                ixz="${148916.20*scale_mm2*gtoKg}"
+                iyy="${593729.76*scale_mm2*gtoKg}"
+                iyz="${zero*scale_mm2*gtoKg}"
+                izz="${691025.98*scale_mm2*gtoKg}" />
     </inertial>
     <collision>
        <geometry>
@@ -29,31 +37,7 @@
     </collision>
   </link>
 
-  <link name="chest-servo">
-    <visual>
-      <geometry>
-        <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-      </geometry>
-      <material name="red"/>
-      <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
-    </visual>
-    <inertial>
-      <mass value="${60*gtoKg}" />
-      <origin rpy="0 0 0" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
-      <inertia  ixx="${1*scale_mm2*gtoKg}"
-              ixy="${0*scale_mm2*gtoKg}"
-              ixz="${0*scale_mm2*gtoKg}"
-              iyy="${1*scale_mm2*gtoKg}"
-              iyz="${0*scale_mm2*gtoKg}"
-              izz="${1*scale_mm2*gtoKg}" />
-    </inertial>
-    <collision>
-       <geometry>
-         <mesh filename="package://quaro_description/meshes/AX-12A.stl" scale="${scale} ${scale} ${scale}"/>
-       </geometry>
-       <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${0*scale}"/>
-     </collision>
-  </link>
+  <xacro:ax12a name="chest-servo" rpy="0 0 0" color="gray"/>
 
   <link name="spine">
     <visual>
@@ -64,14 +48,14 @@
       <origin rpy="0 0 0" xyz="${16.58*scale} -${0.56*scale} ${0*scale}"/>
     </visual>
     <inertial>
-      <mass value="${60*gtoKg}" />
-      <origin rpy="0 0 0" xyz="${0*scale} -${0.56*scale} ${0*scale}"/>
-      <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
+      <mass value="${15.89*gtoKg}" />
+      <origin rpy="0 0 0" xyz="${16.58*scale} -${0.56*scale} ${0*scale}"/>
+      <inertia  ixx="${5271.72*scale_mm2*gtoKg}"
+                ixy="${117.19*scale_mm2*gtoKg}"
+                ixz="${zero*scale_mm2*gtoKg}"
+                iyy="${3500.43*scale_mm2*gtoKg}"
+                iyz="${0.01*scale_mm2*gtoKg}"
+                izz="${5925.70*scale_mm2*gtoKg}" />
     </inertial>
     <collision>
        <geometry>
@@ -90,14 +74,14 @@
       <origin rpy="${0} ${0} ${0}" xyz="${0*scale} ${0*scale} ${0*scale}"/>
     </visual>
     <inertial>
-      <mass value="${60*gtoKg}" />
-      <origin rpy="0 0 0" xyz="${71.80*scale} ${0*scale} -${24.62*scale}"/>
-      <inertia  ixx="${1*scale_mm2*gtoKg}"
-                ixy="${0*scale_mm2*gtoKg}"
-                ixz="${0*scale_mm2*gtoKg}"
-                iyy="${1*scale_mm2*gtoKg}"
-                iyz="${0*scale_mm2*gtoKg}"
-                izz="${1*scale_mm2*gtoKg}" />
+      <mass value="${128.96*gtoKg}" />
+      <origin rpy="0 0 0" xyz="${71.80*scale} ${0.05*scale} -${24.62*scale}"/>
+      <inertia  ixx="${327047.38*scale_mm2*gtoKg}"
+                ixy="${314.55*scale_mm2*gtoKg}"
+                ixz="${-219751.03*scale_mm2*gtoKg}"
+                iyy="${984722.31*scale_mm2*gtoKg}"
+                iyz="${-22.94*scale_mm2*gtoKg}"
+                izz="${1072193.50*scale_mm2*gtoKg}" />
     </inertial>
     <collision>
        <geometry>
@@ -118,7 +102,7 @@
     <child link="spine"/>
     <origin rpy="${-pi/2} ${0} ${-pi}" xyz="-${0*scale} -${0*scale} ${0*scale}"/>
     <axis xyz="0 1 0"/>
-    <limit effort="1000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
+    <limit effort="100000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
   </joint>
 
   <joint name="last" type="fixed">
