@@ -6,7 +6,9 @@
   <!-- 0 value in the inertia tensor can cause the robot to crash and
        sets the link to their origin in the world frame.
   -->
-  <xacro:property name="zero" value="1"/>
+  <xacro:property name="zero" value="0.1"/>
+  <xacro:property name="effort" value="50"/>
+  <xacro:property name="velocity" value='0.1'/>
 
   <xacro:macro name="body" params="sensors">
 
@@ -102,7 +104,7 @@
     <child link="spine"/>
     <origin rpy="${-pi/2} ${0} ${-pi}" xyz="-${0*scale} -${0*scale} ${0*scale}"/>
     <axis xyz="0 1 0"/>
-    <limit effort="100000.0" lower="${-pi/2}" upper="${pi/2}" velocity="0.5"/>
+    <limit effort="${effort}" lower="${-pi/3}" upper="${pi/3}" velocity="${velocity}"/>
   </joint>
 
   <joint name="last" type="fixed">
