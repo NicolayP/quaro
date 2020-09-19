@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <launch>
   <!-- argument for launch file-->
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
+
+  <arg name="model" default="$(find quaro_description)/urdf/quaro.xacro"/>
+  <arg name="robot_name" default="quaro"/>
+  <arg name="rvizconfig" default="$(find quaro_description)/rviz/robot.rviz"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find quaro_gazebo)/world/empty.world"/>
@@ -14,10 +18,16 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <include file="$(find quaro_description)/launch/display.launch">
-    <arg name="model" value="$(find quaro_description)/urdf/quaro.xacro"/>
-    <arg name="robot_name" default="quaro"/>
-  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher"
+        respawn="false" output="screen">
+    <param name="publish_frequency" type="double" value="30.0" />
+    <remap from="/joint_states" to="/quaro/joint_states" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
 
   <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find quaro_description)/urdf/quaro.xacro'"/>
@@ -25,11 +35,4 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -model quaro -param robot_description -x 1 -x 2 -z 0"/>
 
-
-  <rosparam command="load"
-            file="$(find quaro_gazebo)/config/joints.yaml"
-            ns="quaro_joint_state_controller" />
-
-  <node name="quaro_controller_spawner" pkg="controller_manager" type="spawner"
-            args="quaro_joint_state_controller"/>
 </launch>
