@@ -1,0 +1,71 @@
+quaro:
+    # Publish all joint states ------------------------
+    joint_state_controller:
+      type: joint_state_controller/JointStateController
+      publish_rate: 50
+
+    # Position Controller -----------------------------
+    chest_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: chest
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    hip0_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip0
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    hip1_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip1
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    hip2_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip2
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    hip3_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: hip3
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    knee0_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: knee0
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    knee1_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: knee1
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    knee2_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: knee2
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    knee3_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: knee3
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    ankle0_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: ankle0
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    ankle1_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: ankle1
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    ankle2_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: ankle2
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    ankle3_position_controller:
+      type: effort_controllers/JointPositionController
+      joint: ankle3
+      pid: {p: 100.0, i: 0.01, d: 10.0}

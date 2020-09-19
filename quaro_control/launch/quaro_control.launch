@@ -1,0 +1,25 @@
+<launch>
+  <rosparam file="$(find quaro_control)/config/quaro_control.yaml" command="load"/>
+
+  <node name="controller_swpaner" pkg="controller_manager" type="spawner" respawn="false"
+      output="screen" ns="/quaro" args="chest_position_controller
+                                        hip0_position_controller
+                                        hip1_position_controller
+                                        hip2_position_controller
+                                        hip3_position_controller
+                                        knee0_position_controller
+                                        knee1_position_controller
+                                        knee2_position_controller
+                                        knee3_position_controller
+                                        ankle0_position_controller
+                                        ankle1_position_controller
+                                        ankle2_position_controller
+                                        ankle3_position_controller
+                                        joint_state_controller"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+        <remap from="/joint_states" to="/quaro/joint_states" />
+    </node>
+
+</launch>
