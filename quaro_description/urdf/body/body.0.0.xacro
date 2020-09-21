@@ -7,8 +7,10 @@
        sets the link to their origin in the world frame.
   -->
   <xacro:property name="zero" value="0.1"/>
-  <xacro:property name="effort" value="50"/>
-  <xacro:property name="velocity" value='0.1'/>
+  <!-- Servo does 15kgf.cm-->
+  <xacro:property name="effort" value="1.471"/>
+  <!-- Servo has a rotation of 59 RPM -> 6.178465545 rad/sec -->
+  <xacro:property name="velocity" value='6.178465545'/>
 
   <xacro:macro name="body" params="sensors">
 

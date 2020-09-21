@@ -6,7 +6,7 @@
          sets the link to their origin in the world frame.
     -->
     <xacro:property name="zero" value="0.0"/>
-    <xacro:property name="effort" value="50"/>
+    <xacro:property name="effort" value="1.47"/>
     <xacro:property name="velocity" value='0.1'/>
     <!-- first link -->
     <xacro:ax12a name="hip${n}-servo" rpy="0 ${pi} 0" color="red"/>

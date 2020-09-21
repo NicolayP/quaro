@@ -10,7 +10,7 @@
         <origin rpy="${rpy}" xyz="${0*scale} ${0*scale} ${0*scale}"/>
       </visual>
       <inertial>
-        <mass value="${43.01*gtoKg}" />
+        <mass value="${53.01*gtoKg}" />
         <origin rpy="${rpy}" xyz="${12.61*scale} ${0*scale} ${1.21*scale}"/>
 
         <inertia  ixx="${6917994*scale_mm2*gtoKg}"
