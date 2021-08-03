@@ -3,7 +3,7 @@
 ## Simulation.
 
   - [ ] Get a working simulation.
-    - [ ] Do the model description.
+    - [X] Do the model description.
     - [ ] Add servo low level control.
 
 ## Real robot.
