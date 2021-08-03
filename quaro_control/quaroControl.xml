@@ -1,4 +1,4 @@
-<library path="lib/librandom_walker">
+<library path="lib/libquaro_control">
   <class name="random_walker/RandomWalker" type="random_walker::RandomWalker" base_class_type="controller_interface::ControllerBase">
     <description>
       A random walker for ros control.
