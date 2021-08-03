@@ -78,7 +78,7 @@ class SimpleWalker(object):
 
 
 def main():
-    sw = SimpleWalker(goal_file="/home/pierre/Personal/workspace/quad_rob/quaro-ws/src/quaro_control/config/waypoints.yaml")
+    sw = SimpleWalker(goal_file="/home/pierre/personal/workspace/quad_rob/quaro-ws/src/quaro/quaro_control/config/waypoints.yaml")
     sw.run()
 
 if __name__ == '__main__':
