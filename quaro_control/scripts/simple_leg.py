@@ -40,6 +40,7 @@ class SimpleWalker(object):
     def loadGoals(self, file):
         with open(file) as msg:
             self.goals = yaml.load(msg)['waypoints']
+        self.goals.reverse()
         rospy.loginfo("Loaded goals")
         rospy.loginfo(self.goals)
         self.getNextGoal()
@@ -53,8 +54,6 @@ class SimpleWalker(object):
         #otherwise no new goal, keep the last one
 
     def stateCB(self, msg):
-        rospy.loginfo("Goals remaining stateCB")
-        rospy.loginfo(self.goals)
         for i, val in enumerate(msg.position):
             self.error[i] = self.goal[i] - val
 

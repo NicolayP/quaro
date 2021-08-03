@@ -24,9 +24,13 @@
     <origin rpy="0 0 0" xyz="${0*scale} ${0*scale} ${150*scale}"/>
   </joint>
   <xacro:body sensors="none"/>
+  <!-- Front Left -->
   <xacro:leg n="0" x="132.63" y="74.77" z="-21" rpy="0 0 ${1*pi/4}" parent="front"/>
+  <!-- Front Right -->
   <xacro:leg n="1" x="132.63" y="-74.77" z="-21" rpy="0 0 -${1*pi/4}" parent="front"/>
+  <!-- Back Left -->
   <xacro:leg n="2" x="-107.63" y="74.77" z="-21" rpy="0 0 ${3*pi/4}" parent="back"/>
+  <!-- Back Right -->
   <xacro:leg n="3" x="-107.63" y="-74.77" z="-21" rpy="0 0 -${3*pi/4}" parent="back"/>
 
 

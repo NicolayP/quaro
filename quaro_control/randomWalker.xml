@@ -1,0 +1,7 @@
+<library path="lib/librandom_walker">
+  <class name="random_walker/RandomWalker" type="random_walker::RandomWalker" base_class_type="controller_interface::ControllerBase">
+    <description>
+      A random walker for ros control.
+    </description>
+  </class>
+</library>

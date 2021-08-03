@@ -1,0 +1,59 @@
+rand_quaro:
+  # Publish all joint states ------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controller -----------------------------
+  chest_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: chest
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  hip0_position_controller:
+    type: random_walker/RandomWalker
+    joint: hip0
+
+  hip1_position_controller:
+    type: random_walker/RandomWalker
+    joint: hip1
+
+  hip2_position_controller:
+    type: random_walker/RandomWalker
+    joint: hip2
+
+  hip3_position_controller:
+    type: random_walker/RandomWalker
+    joint: hip3
+
+  knee0_position_controller:
+    type: random_walker/RandomWalker
+    joint: knee0
+
+  knee1_position_controller:
+    type: random_walker/RandomWalker
+    joint: knee1
+
+  knee2_position_controller:
+    type: random_walker/RandomWalker
+    joint: knee2
+
+  knee3_position_controller:
+    type: random_walker/RandomWalker
+    joint: knee3
+
+  ankle0_position_controller:
+    type: random_walker/RandomWalker
+    joint: ankle0
+
+  ankle1_position_controller:
+    type: random_walker/RandomWalker
+    joint: ankle1
+
+  ankle2_position_controller:
+    type: random_walker/RandomWalker
+    joint: ankle2
+
+  ankle3_position_controller:
+    type: random_walker/RandomWalker
+    joint: ankle3

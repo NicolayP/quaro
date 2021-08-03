@@ -144,5 +144,13 @@
       <limit effort="${effort}" lower="${-pi/3}" upper="${pi/3}" velocity="${velocity}"/>
     </joint>
 
+    <link name="eff${n}"/>
+
+    <joint name="eff${n}-joint" type="fixed">
+      <parent link="foot${n}"/>
+      <child link="eff${n}"/>
+      <origin xyz="${70*scale} -${115*scale} 0" rpy="-${pi/2} 0 0"/>
+    </joint>
+
   </xacro:macro>
 </robot>
