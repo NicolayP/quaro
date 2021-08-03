@@ -14,4 +14,8 @@
     ```
         roslaunch quaro_control quaro_control_pid.launch
     ```
-    
+
+    to launch the python script:
+    ```
+        rosrun quaro_control simple_leg.py
+    ```
