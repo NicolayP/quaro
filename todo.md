@@ -23,15 +23,10 @@
   | Items | Quantity | Unit Price | Total Price | Link |
   |-------|----------|------------|-------------|------|
   | Jetson | 1       | X          | X           | X    |
-  
   | Raspberry | 1       | X          | X           | X    |
-  
   | Batteries | 1       | X          | X           | X    |
-  
   | Servos | 3*4?       | X          | X           | X    |
-  
   | Power Supply | 1       | X          | X           | X    |
-  
   | Srevo Controller? | 1       | X          | X           | X    |
   
 
